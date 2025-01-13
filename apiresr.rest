@@ -1,0 +1,8 @@
+GET http://localhost:3000/api/posts
+
+###
+POST http://localhost:3000/api/posts
+{
+  "title": "My First Post",
+  "content": "This is the content of my first post."
+}
