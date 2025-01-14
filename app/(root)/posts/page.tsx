@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import  Card  from "@/components/card"
 
-
+ 
 
 interface PostProps{
   _id:string,
