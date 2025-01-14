@@ -4,6 +4,6 @@ GET http://localhost:3000/api/posts
 POST http://localhost:3000/api/posts
 Content-Type: application/json
 {
-  "title": "My First Post",
+  "title": "hell First Post",
   "content": "This is the content of my first post."
 }

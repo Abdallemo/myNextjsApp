@@ -1,13 +1,17 @@
-// import { useState ,useEffect } from "react";
 
-export default function Home() {
+export default function  Home() {
 
 
   return (
     
     <>
-    <h1>Home</h1>
+    <div className="flex flex-col items-center bg-slate-300 ">
+      Home
+    </div>
+
+  
     
+
     </>
   );
 }

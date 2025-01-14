@@ -25,8 +25,8 @@ const Navbar = async () => {
         {session && session?.user ? (
           <>
             <div className='flex gap-4'>
-              <Link href="/"> Dashboard</Link>
-              <Link href="/"> Settings</Link>
+              <Link href="/posts/newpost"> Create</Link>
+              <Link href="/posts"> All Post</Link>
             </div>
             <div>
                 <DropdownMenu >
