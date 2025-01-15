@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { auth, signIn, signOut } from "@/auth"
-// import { redirect } from 'next/dist/server/api-utils';
+import { ModeToggle } from './toggle-mod';
 import Profile from './profile';
 import { Github } from "lucide-react"
 import {
@@ -16,8 +16,8 @@ import { Button } from "@/components/ui/button"
 const Navbar = async () => {
   const session = await auth();
   return (
-    <header className='px-5 py-3 bg-gray-900 shadow-lg shadow-inherit font-serif '>
-      <nav className=' flex justify-between text-2xl items-center text-white'>
+    <header className='px-5 py-3  shadow-lg shadow-inherit font-serif '>
+      <nav className=' flex justify-between text-2xl items-center '>
         <Link href="/">
           {/* <Image src='/logo.png' alt='logo' width={90} height={24}></Image> */}
           Logo
@@ -28,7 +28,7 @@ const Navbar = async () => {
               <Link href="/posts/newpost"> Create</Link>
               <Link href="/posts"> All Post</Link>
             </div>
-            <div>
+            <div className='flex items-center gap-3 '>
                 <DropdownMenu >
                   <DropdownMenuTrigger >
                     <Profile username={session?.user.name} avatar={session?.user.image} />
@@ -38,6 +38,8 @@ const Navbar = async () => {
                     <DropdownMenuLabel>My Account</DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem>Profile</DropdownMenuItem>
+                    <DropdownMenuItem>
+                    </DropdownMenuItem>
                     <DropdownMenuItem>Billing</DropdownMenuItem>
                     <DropdownMenuItem>Team</DropdownMenuItem>
                     <DropdownMenuItem
@@ -51,6 +53,7 @@ const Navbar = async () => {
                   </DropdownMenuContent>
                 </DropdownMenu>
 
+                <ModeToggle/>
 
                 
               
@@ -66,7 +69,7 @@ const Navbar = async () => {
               <Link href="/"> Pricing</Link>
             </div>
 
-            <form
+            <form className='flex items-center gap-1'
               action={async () => {
                 "use server"
                 await signIn("github")
@@ -75,6 +78,8 @@ const Navbar = async () => {
               <Button type="submit" >
                 <Github /> Login with Gitub
               </Button>
+              <ModeToggle/>
+
             </form>
 
           </>

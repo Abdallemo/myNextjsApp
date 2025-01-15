@@ -11,7 +11,7 @@ interface CardProps {
 export default function Card({post}:CardProps) {
     const _posts = post;
   return (
-    <div className=" bg-orange-200 rounded-md h-32 flex flex-col flex-grow min-w-[200px] p-2">
+    <div className=" bg-orange-200 dark:bg-gray-700 rounded-md min-h-22 flex flex-col flex-grow max-w-[200px] p-2 text-wrap ">
         <div className="flex flex-row gap-6 justify-between">
             <p>{_posts.title}</p>
             <Favoratebtn/>
@@ -20,5 +20,6 @@ export default function Card({post}:CardProps) {
             <p>{_posts.content}</p>
         </div>
     </div>
+    
   )
 }
