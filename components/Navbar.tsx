@@ -13,16 +13,20 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
+import { SidebarTrigger } from './ui/sidebar';
 
 const Navbar = async () => {
   const session = await auth();
   return (
     <header className='px-5 py-3  shadow-lg shadow-inherit font-serif '>
       <nav className=' flex justify-between text-2xl items-center '>
+        <div>
+        <SidebarTrigger />
         <Link href="/">
           {/* <Image src='/logo.png' alt='logo' width={90} height={24}></Image> */}
           Logo
         </Link>
+        </div>
         {session && session?.user ? (
           <>
             <div className='flex gap-4'>

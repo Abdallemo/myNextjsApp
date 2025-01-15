@@ -1,6 +1,6 @@
 import Navbar from "@/components/Navbar";
 import { ThemeProvider } from "@/components/ui/theme-provider"
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
+import { SidebarProvider } from "@/components/ui/sidebar"
 import { AppSidebar } from "@/components/app-sidebar"
 
 export default function Layout({children}:Readonly<{children:React.ReactNode}>){
@@ -16,7 +16,7 @@ export default function Layout({children}:Readonly<{children:React.ReactNode}>){
             disableTransitionOnChange
             
             >
-                  <SidebarTrigger />
+                  
               <Navbar/>
             {children}
           </ThemeProvider>
