@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { auth, signIn, signOut } from "@/auth"
-import { ModeToggle } from './toggle-mod';
+import  ModeToggle  from './toggle-mod';
 import Profile from './profile';
 import { Github } from "lucide-react"
 import { CommandDialogDemo } from './mycommand';

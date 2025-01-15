@@ -14,6 +14,7 @@ export default function Layout({children}:Readonly<{children:React.ReactNode}>){
             defaultTheme="system"
             enableSystem
             disableTransitionOnChange
+            
             >
                   <SidebarTrigger />
               <Navbar/>
