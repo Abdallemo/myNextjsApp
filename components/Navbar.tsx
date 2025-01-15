@@ -3,6 +3,7 @@ import { auth, signIn, signOut } from "@/auth"
 import { ModeToggle } from './toggle-mod';
 import Profile from './profile';
 import { Github } from "lucide-react"
+import { CommandDialogDemo } from './mycommand';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -29,6 +30,9 @@ const Navbar = async () => {
               <Link href="/posts"> All Post</Link>
             </div>
             <div className='flex items-center gap-3 '>
+                
+              <CommandDialogDemo/>
+                
                 <DropdownMenu >
                   <DropdownMenuTrigger >
                     <Profile username={session?.user.name} avatar={session?.user.image} />
