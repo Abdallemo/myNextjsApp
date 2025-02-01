@@ -1,25 +1,58 @@
+'use client'
 import Favoratebtn from '@/components/favoratebtn'
+import { Trash2 } from 'lucide-react';
+import { Button } from './ui/button';
+import deletPost from '@/lib/deletePost';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 
 
 interface CardProps {
-    post: {
-      _id: string;
-      title: string;
-      content: string;
-    };
+  post: {
+    _id: string;
+    title: string;
+    content: string;
+    likes?: boolean;
+  };
+}
+export default function MyCard({ post }: CardProps) {
+
+  const _posts = post;
+  const delteHandler = async (id: string) => {
+    await deletPost(id)
   }
-export default function Card({post}:CardProps) {
-    const _posts = post;
+
   return (
-    <div className=" bg-orange-200 dark:bg-gray-700 rounded-md min-h-22 flex flex-col flex-grow max-w-[200px] p-2 text-wrap ">
-        <div className="flex flex-row gap-6 justify-between">
-            <p>{_posts.title}</p>
-            <Favoratebtn/>
-        </div>
-        <div className="text-lg">
-            <p>{_posts.content}</p>
-        </div>
-    </div>
-    
+
+    <Card className='w-[350px]'>
+      <CardHeader >
+        <CardTitle>{_posts.title}</CardTitle>
+        <CardDescription className='flex flex-row justify-end'>
+
+        <Favoratebtn likes={_posts.likes!} />
+        </CardDescription>
+        
+
+
+      </CardHeader>
+      <CardContent>
+        <p>{_posts.content}</p>
+      </CardContent>
+
+      <CardFooter className='flex flex-row justify-end'>
+      <Button onClick={() => delteHandler(_posts._id)} variant={'default'}>
+          <Trash2 />
+        </Button>
+      </CardFooter>
+
+    </Card>
+
+
   )
 }

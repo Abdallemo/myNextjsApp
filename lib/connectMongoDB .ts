@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 export default async function connectMongoDB () {
-    if(mongoose.connections[0].readyState)return
+    if (mongoose.connection.readyState === 1) return;
 
     try {
         await mongoose.connect('mongodb://localhost/mydatabase')

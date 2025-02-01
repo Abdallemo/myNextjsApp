@@ -3,18 +3,19 @@ import connectMongoDB from "./connectMongoDB ";
 import Posts from "@/models/posts";
 import { Document } from "mongoose";
 
-interface PostProps  extends Document {
+ interface PostProps  extends Document {
   _id: string;
   title: string;
   content: string;
+  like:boolean;
 }
 
 export default async function getPosts(): Promise<PostProps[]> {
-  await connectMongoDB(); // Ensure database is connected
+  await connectMongoDB(); 
 
   try {
     const posts = await Posts.find().lean<PostProps[]>(); 
-    // await new Promise((resolve)=> setTimeout(resolve,2000))
+    
 
     return posts;
   } catch (error) {
