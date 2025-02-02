@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { auth, signIn, signOut } from "@/auth"
-import  ModeToggle  from './toggle-mod';
+import ModeToggle from './toggle-mod';
 import Profile from './profile';
 import { Github } from "lucide-react"
 import { CommandDialogDemo } from './mycommand';
@@ -13,6 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
+import { Separator } from "@/components/ui/separator"
 import { SidebarTrigger } from './ui/sidebar';
 
 const Navbar = async () => {
@@ -21,11 +22,11 @@ const Navbar = async () => {
     <header className='px-5 py-3  shadow-lg shadow-inherit font-serif '>
       <nav className=' flex justify-between text-2xl items-center '>
         <div>
-        <SidebarTrigger />
-        <Link href="/">
-          {/* <Image src='/logo.png' alt='logo' width={90} height={24}></Image> */}
-          Logo
-        </Link>
+          <SidebarTrigger />
+          <Link href="/">
+            {/* <Image src='/logo.png' alt='logo' width={90} height={24}></Image> */}
+            Logo
+          </Link>
         </div>
         {session && session?.user ? (
           <>
@@ -34,23 +35,24 @@ const Navbar = async () => {
               <Link href="/posts"> All Post</Link>
             </div>
             <div className='flex items-center gap-3 '>
-                
-              <CommandDialogDemo/>
-                
-                <DropdownMenu >
-                  <DropdownMenuTrigger >
-                    <Profile username={session?.user.name} avatar={session?.user.image} />
-                  </DropdownMenuTrigger>
 
-                  <DropdownMenuContent className='w-32'>
-                    <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                    <DropdownMenuSeparator />
+              <CommandDialogDemo />
+
+              <DropdownMenu >
+                <DropdownMenuTrigger >
+                  <Profile username={session?.user.name} avatar={session?.user.image} />
+                </DropdownMenuTrigger>
+
+                <DropdownMenuContent className='w-32'>
+                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <Link href="/profile">
                     <DropdownMenuItem>Profile</DropdownMenuItem>
-                    <DropdownMenuItem>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem>Billing</DropdownMenuItem>
-                    <DropdownMenuItem>Team</DropdownMenuItem>
-                    <DropdownMenuItem
+                  </Link>
+                  <DropdownMenuItem>Billing</DropdownMenuItem>
+                  <DropdownMenuItem>Team</DropdownMenuItem>
+                  <Separator/>
+                  <DropdownMenuItem 
                     onClick={async () => {
                       "use server"
                       await signOut({ redirectTo: '/' });
@@ -58,13 +60,13 @@ const Navbar = async () => {
                   >
                     Log out
                   </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
+                </DropdownMenuContent>
+              </DropdownMenu>
 
-                <ModeToggle/>
+              <ModeToggle />
 
-                
-              
+
+
 
             </div>
 
@@ -86,7 +88,7 @@ const Navbar = async () => {
               <Button type="submit" >
                 <Github /> Login with Gitub
               </Button>
-              <ModeToggle/>
+              <ModeToggle />
 
             </form>
 
