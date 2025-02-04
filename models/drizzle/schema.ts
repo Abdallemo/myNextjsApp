@@ -1,0 +1,94 @@
+import {  relations } from "drizzle-orm";
+import { integer, pgTable, uuid, varchar, pgEnum, boolean, real, timestamp, primaryKey } from "drizzle-orm/pg-core";
+export const userRole = pgEnum('role', ["ADMIN", "BASIC"])
+
+export const UserTable = pgTable('user', {
+    id: uuid('id').primaryKey().defaultRandom(),
+    name: varchar('name', { length: 255 }).notNull(),
+    age: integer('age').notNull(),
+    email: varchar('email', { length: 255 }).notNull().unique(),
+    role: userRole('userRole').default('BASIC').notNull(),
+});
+
+
+export const PostTable = pgTable('posts', {
+    id: uuid('id').primaryKey().defaultRandom(),
+    postTitle: varchar('postTitle').notNull(),
+    authorId: uuid('authorId').references(() => UserTable.id, { onDelete: 'cascade' }).notNull(),
+    avrageRating: real('avarageRating').notNull(),
+    createAt: timestamp('createAt').defaultNow(),
+    updatedAt: timestamp('updatedAt').defaultNow(),
+})
+
+export const UserPrefrencesTable = pgTable('prefrences', {
+    id: uuid('id').primaryKey().defaultRandom(),
+    emailUpdates: boolean("emailUpdates").notNull().default(false),
+    userId: uuid('userId').references(() => UserTable.id, { onDelete: 'cascade' }).notNull()
+
+
+})
+export const CategoryTable = pgTable('categoryTable', {
+    id: uuid('id').primaryKey().defaultRandom(),
+    name: varchar('name', { length: 255 }).notNull(),
+
+
+})
+//* many to many need joint Table 😒
+export const PostCatagotryTable = pgTable('postCatagory', {
+    postId: uuid('postId').references(() => PostTable.id,{onDelete:'cascade'}).notNull(),
+    CatagoryId: uuid('catagoryId').references(() => CategoryTable.id,{onDelete:'cascade'}).notNull(),
+}, table => {
+    return {
+        pk: primaryKey({ columns: [table.postId, table.CatagoryId] })
+    }
+})
+
+
+
+// * Relations
+
+export const UserTableRelation = relations(UserTable, ({ one, many }) => {
+    return {
+        prefrences: one(UserPrefrencesTable),
+        posts: many(PostTable)
+    }
+})
+export const UserPrefrencesTableRelations = relations(UserPrefrencesTable, ({ one }) => {
+    return {
+        user: one(UserTable, {
+            fields: [UserPrefrencesTable.userId],
+            references: [UserTable.id]
+
+        })
+    }
+})
+//* many to many need joint Table Relations 🥲😒
+export const PostTableRelations = relations(PostTable, ({ one, many }) => {
+    return {
+        author: one(UserTable, {
+            fields: [PostTable.authorId],
+            references: [UserTable.id]
+
+        }),
+        postCatagotries: many(PostCatagotryTable)
+    }
+})
+
+
+export const CategoryTableRelations = relations(CategoryTable, ({ many }) => {
+    return {
+        postCatagotries: many(PostCatagotryTable)
+    }
+})
+export const PostCatagotryTableRelations = relations(PostCatagotryTable, ({ one }) => {
+    return {
+        posts: one(PostTable, {
+            fields: [PostCatagotryTable.postId],
+            references: [PostTable.id]
+        }),
+        catagories: one(CategoryTable, {
+            fields: [PostCatagotryTable.CatagoryId],
+            references: [CategoryTable.id]
+        })
+    }
+})
