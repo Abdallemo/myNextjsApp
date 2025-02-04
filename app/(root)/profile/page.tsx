@@ -6,7 +6,7 @@ export default async function ProfilePage(){
     const session = await auth();
     const username = session?.user!.name 
     const email = session?.user!.email 
-
+    console.log(session?.user?.id);
     return(
         <div className="min-w-[350px] max-w-[500px] mx-auto my-10">
            <Card className=" ">
