@@ -1,5 +1,5 @@
 'use server'
-import Posts from "@/models/mongoose_versions/posts";
+import Posts from "@/models/posts";
 import mongoose from "mongoose";
 
 const connectMongoDB = async () => {
