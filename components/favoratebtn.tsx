@@ -2,7 +2,7 @@
 import { Heart } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import { Button } from './ui/button';
-import addlikes from '@/lib/addLikes';
+import {addlikes} from '@/lib/addLikes';
 import getPostsLikes from '@/lib/getLikes';
 
 export default function Favoratebtn({ postId, userId }: { postId: string; userId: string }) {
@@ -27,6 +27,7 @@ export default function Favoratebtn({ postId, userId }: { postId: string; userId
     console.log("Favoratebtn - postId:", postId, "userId:", userId);
 
     try {
+      
       await addlikes(postId, userId, like);
       setLike(!like);
     } catch (error) {

@@ -1,14 +1,17 @@
 "use server"
 import db from "@/models/drizzle/client.drizle";
 
+
 export default async function getPostsLikes(currentPostId: string) {
+  
+
   try {
     const postLikes = await db.query.PostLikesTable.findMany({
       where: (table, fn) => fn.eq(table.postId, currentPostId),
       columns: {
         liked: true,
-        userId:true,
-        postId:true
+        userId: true,
+        postId: true
       },
     });
 

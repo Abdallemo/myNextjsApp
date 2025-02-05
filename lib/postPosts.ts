@@ -1,38 +1,34 @@
 'use server'
 import { auth } from "@/auth";
 import db from "@/models/drizzle/client.drizle";
-import {  PostTable } from "@/models/drizzle/schema";
-import Posts from "@/models/posts";
-import mongoose from "mongoose";
-
-const connectMongoDB = async () => {
-    if (mongoose.connections[0].readyState) return;
-    await mongoose.connect("mongodb://localhost/mydatabase");
-};
+import { PostTable } from "@/models/drizzle/schema";
+import { revalidatePath } from "next/cache";
 
 
-export default async function postPosts(title:string,content:string){
-    await connectMongoDB();
-    
+
+
+
+
+export default async function postPosts(title: string, content: string) {
+
+
     try {
-         await Posts.create(({
-            title,
-            content,
-        }));
-        const  session  = await auth();
-        
+
+        const session = await auth();
+
         await db.insert(PostTable).values({
-            authorId:session?.user?.email as string,
-            postTitle:title,
-            content:content,
+            authorId: session?.user?.email as string,
+            postTitle: title,
+            content: content,
             createAt: new Date(),
 
         })
+        revalidatePath('/posts')
 
     } catch (error) {
         console.log(error);
     }
 
-    
+
 
 }

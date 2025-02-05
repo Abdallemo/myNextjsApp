@@ -1,4 +1,4 @@
-// lib/getPosts.ts
+
 import db from "@/models/drizzle/client.drizle";
 import { auth } from "@/auth";
 
@@ -19,7 +19,7 @@ export default async function getPosts() {
             name: true, id: true
           },
           with: {
-            prefrences: {columns:{emailUpdates:true}}
+            prefrences: { columns: { emailUpdates: true } }
           }
         },
         likes: {
