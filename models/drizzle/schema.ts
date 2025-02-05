@@ -5,7 +5,8 @@ export const userRole = pgEnum('role', ["ADMIN", "BASIC"])
 export const UserTable = pgTable('user', {
     id: uuid('id').primaryKey().defaultRandom(),
     name: varchar('name', { length: 255 }).notNull(),
-    age: integer('age').notNull(),
+    age: integer('age'),
+    githubId: varchar('github_id', { length: 255 }).unique().notNull(),
     email: varchar('email', { length: 255 }).notNull().unique(),
     role: userRole('userRole').default('BASIC').notNull(),
 });
@@ -14,8 +15,9 @@ export const UserTable = pgTable('user', {
 export const PostTable = pgTable('posts', {
     id: uuid('id').primaryKey().defaultRandom(),
     postTitle: varchar('postTitle').notNull(),
-    authorId: uuid('authorId').references(() => UserTable.id, { onDelete: 'cascade' }).notNull(),
-    avrageRating: real('avarageRating').notNull(),
+    content:varchar('content').notNull(),
+    authorId: varchar('authorId').references(() => UserTable.email, { onDelete: 'cascade' }).notNull(),
+    avrageRating: real('avarageRating').default(0.0),
     createAt: timestamp('createAt').defaultNow(),
     updatedAt: timestamp('updatedAt').defaultNow(),
 })
@@ -67,7 +69,7 @@ export const PostTableRelations = relations(PostTable, ({ one, many }) => {
     return {
         author: one(UserTable, {
             fields: [PostTable.authorId],
-            references: [UserTable.id]
+            references: [UserTable.email]
 
         }),
         postCatagotries: many(PostCatagotryTable)
