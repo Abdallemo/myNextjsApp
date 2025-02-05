@@ -11,48 +11,36 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { PostType } from '@/lib/getPosts';
 
 
-interface CardProps {
-  post: {
-    _id: string;
-    title: string;
-    content: string;
-    likes?: boolean;
-  };
-}
-export default function MyCard({ post }: CardProps) {
 
+export default function MyCard({ post,currentUserEmail }: { post: PostType ,currentUserEmail:string}) {
   const _posts = post;
+  console.log("MyCard - Current User Email:", currentUserEmail);
+
+  
   const delteHandler = async (id: string) => {
-    await deletPost(id)
-  }
+    await deletPost(id);
+  };
 
   return (
-
     <Card className='w-[350px]'>
-      <CardHeader >
-        <CardTitle>{_posts.title}</CardTitle>
+      <CardHeader>
+        <CardTitle>{_posts.postTitle}</CardTitle>
         <CardDescription className='flex flex-row justify-end'>
-
-        <Favoratebtn likes={_posts.likes!} />
+          {/* Pass postId and userId to the like button */}
+          <Favoratebtn postId={post.id} userId={currentUserEmail} />
         </CardDescription>
-        
-
-
       </CardHeader>
       <CardContent>
         <p>{_posts.content}</p>
       </CardContent>
-
       <CardFooter className='flex flex-row justify-end'>
-      <Button onClick={() => delteHandler(_posts._id)} variant={'default'}>
+        <Button onClick={() => delteHandler(_posts.id)} variant={'default'}>
           <Trash2 />
         </Button>
       </CardFooter>
-
     </Card>
-
-
-  )
+  );
 }

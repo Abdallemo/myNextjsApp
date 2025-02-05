@@ -1,4 +1,4 @@
-import {  relations } from "drizzle-orm";
+import { relations } from "drizzle-orm";
 import { integer, pgTable, uuid, varchar, pgEnum, boolean, real, timestamp, primaryKey } from "drizzle-orm/pg-core";
 export const userRole = pgEnum('role', ["ADMIN", "BASIC"])
 
@@ -15,11 +15,17 @@ export const UserTable = pgTable('user', {
 export const PostTable = pgTable('posts', {
     id: uuid('id').primaryKey().defaultRandom(),
     postTitle: varchar('postTitle').notNull(),
-    content:varchar('content').notNull(),
+    content: varchar('content').notNull(),
     authorId: varchar('authorId').references(() => UserTable.email, { onDelete: 'cascade' }).notNull(),
     avrageRating: real('avarageRating').default(0.0),
     createAt: timestamp('createAt').defaultNow(),
     updatedAt: timestamp('updatedAt').defaultNow(),
+})
+export const PostLikesTable = pgTable('postLikes', {
+    id: uuid('id').primaryKey().defaultRandom(),
+    postId: uuid('postId').references(() => PostTable.id, { onUpdate: 'cascade' }),
+    userId: uuid('id').references(()=>UserTable.id,{onUpdate:'cascade'}),
+    liked:boolean('liked').default(false)
 })
 
 export const UserPrefrencesTable = pgTable('prefrences', {
@@ -37,8 +43,8 @@ export const CategoryTable = pgTable('categoryTable', {
 })
 //* many to many need joint Table 😒
 export const PostCatagotryTable = pgTable('postCatagory', {
-    postId: uuid('postId').references(() => PostTable.id,{onDelete:'cascade'}).notNull(),
-    CatagoryId: uuid('catagoryId').references(() => CategoryTable.id,{onDelete:'cascade'}).notNull(),
+    postId: uuid('postId').references(() => PostTable.id, { onDelete: 'cascade' }).notNull(),
+    CatagoryId: uuid('catagoryId').references(() => CategoryTable.id, { onDelete: 'cascade' }).notNull(),
 }, table => {
     return {
         pk: primaryKey({ columns: [table.postId, table.CatagoryId] })
@@ -72,10 +78,23 @@ export const PostTableRelations = relations(PostTable, ({ one, many }) => {
             references: [UserTable.email]
 
         }),
-        postCatagotries: many(PostCatagotryTable)
+        postCatagotries: many(PostCatagotryTable),
+        likes:many(PostLikesTable)
     }
 })
-
+//im confused of the relation here help
+export const PostLikesTableRaltions = relations(PostLikesTable,({one})=>{
+    return{
+        post: one(PostTable, {
+            fields: [PostLikesTable.postId],
+            references: [PostTable.id],
+        }),
+        user: one(UserTable, {
+            fields: [PostLikesTable.userId],
+            references: [UserTable.id],
+        })
+    }
+})
 
 export const CategoryTableRelations = relations(CategoryTable, ({ many }) => {
     return {

@@ -1,7 +1,7 @@
 'use server'
 import { auth } from "@/auth";
 import db from "@/models/drizzle/client.drizle";
-import { PostTable } from "@/models/drizzle/schema";
+import {  PostTable } from "@/models/drizzle/schema";
 import Posts from "@/models/posts";
 import mongoose from "mongoose";
 

@@ -1,13 +1,15 @@
 // app/posts/page.tsx
+import { auth } from "@/auth";
 import MyCard from "@/components/card";
 // import {Card} from "@/components/ui/card";
-import getPosts from "@/lib/getPosts";
+import getPosts, { PostType } from "@/lib/getPosts";
 
 
 export default async function PostPage() {
   console.log('checing if client')
   const posts = await getPosts();
-
+  const session = await auth()
+  console.log('Yo Current Email ;;;;;;;'+session?.user?.email as string);
   return (
     <>
       <h1 className="text-center text-3xl py-10">All Posts</h1>
@@ -16,9 +18,9 @@ export default async function PostPage() {
 
           {posts.length>0 ?
           
-            posts.map((post) => (
+            posts.map((post:PostType) => (
 
-              <MyCard post={{...post,_id:post._id.toString()}} key={post._id}  />
+              <MyCard post={{...post ,id:post.id}} key={post.id} currentUserEmail={session?.user?.email as string} />
   
             )) : 
             
