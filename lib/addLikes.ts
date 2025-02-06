@@ -5,11 +5,6 @@ import { and, eq } from "drizzle-orm";
 
 export async function addlikes(postId: string, userId: string, currentLikeStatus: boolean) {
     try {
-        // const post = await db.query.PostTable.findFirst({
-        //     where: (table, fn) => fn.eq(PostTable.id, postId),
-        //     with: { author: true, likes: true }
-        // });
-
        
         const existingLike = await db.query.PostLikesTable.findFirst({
             where: (table, fn) => fn.and(

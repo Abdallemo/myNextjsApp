@@ -23,8 +23,8 @@ export const PostTable = pgTable('posts', {
 })
 export const PostLikesTable = pgTable('postLikes', {
     id: uuid('id').primaryKey().defaultRandom(),
-    postId: uuid('postId').references(() => PostTable.id, { onUpdate: 'cascade' }),
-    userId: varchar('userId').references(()=>UserTable.email,{onUpdate:'cascade'}),
+    postId: uuid('postId').references(() => PostTable.id, { onUpdate: 'cascade' ,onDelete:'cascade'}),
+    userId: varchar('userId').references(()=>UserTable.email,{onUpdate:'cascade',onDelete:'cascade'}),
     liked:boolean('liked').default(false)
 })
 

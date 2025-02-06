@@ -18,10 +18,11 @@ import { PostType } from '@/lib/getPosts';
 export default function MyCard({ post,currentUserEmail }: { post: PostType ,currentUserEmail:string}) {
   const _posts = post;
   console.log("MyCard - Current User Email:", currentUserEmail);
-
+  
   
   const delteHandler = async (id: string) => {
-    await deletPost(id);
+     await deletPost(id,currentUserEmail);
+    
   };
 
   return (
@@ -37,9 +38,12 @@ export default function MyCard({ post,currentUserEmail }: { post: PostType ,curr
         <p>{_posts.content}</p>
       </CardContent>
       <CardFooter className='flex flex-row justify-end'>
-        <Button onClick={() => delteHandler(_posts.id)} variant={'default'}>
+        { post.authorId==currentUserEmail ?
+      (<Button onClick={() => delteHandler(_posts.id)} variant={'default'}>
           <Trash2 />
-        </Button>
+        </Button>):null
+
+        }
       </CardFooter>
     </Card>
   );
