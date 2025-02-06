@@ -32,8 +32,8 @@ const Navbar = async () => {
         {session && session?.user ? (
           <>
             <div className='flex gap-4'>
-              <Link href="/posts/newpost"> Create</Link>
-              <Link href="/posts"> All Post</Link>
+            <Link href="/"> Features</Link>
+            <Link href="#pricing"> Pricing</Link>
             </div>
             <div className='flex items-center gap-3 '>
 
@@ -50,7 +50,10 @@ const Navbar = async () => {
                   <Link href="/profile">
                     <DropdownMenuItem>Profile</DropdownMenuItem>
                   </Link>
-                  <DropdownMenuItem>Billing</DropdownMenuItem>
+                  <Link href="/posts">
+                    <DropdownMenuItem>Dashbard</DropdownMenuItem>
+                  </Link>
+                 
                   <DropdownMenuItem>Team</DropdownMenuItem>
                   <Separator />
                   <DropdownMenuItem
