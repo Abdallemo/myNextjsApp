@@ -52,6 +52,7 @@ export default function CreatePost() {
 
   return (
     <>
+      <main className="max-w-full max-h-full  mt-32 mx-auto items-start justify-center">
       <h1 className="text-center text-3xl">Create New Post</h1>
       
       {/* Use ShadCN form */}
@@ -92,6 +93,7 @@ export default function CreatePost() {
           <Button type="submit">Add New Post</Button>
         </form>
       </Form>
+      </main>
     </>
   );
 }
