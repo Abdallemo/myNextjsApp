@@ -14,6 +14,8 @@ import { Input } from "@/components/ui/input"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
+import { useToast } from "@/hooks/use-toast";
+
 
 const formSchema = z.object({
   title: z.string().min(4, {
@@ -25,6 +27,7 @@ const formSchema = z.object({
 });
 
 export default function CreatePost() {
+  const {toast} = useToast()
   const myform = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -35,7 +38,13 @@ export default function CreatePost() {
 
   const submitHandler = async (values: z.infer<typeof formSchema>) => {
     await postPosts(values.title, values.content);
-    console.log("Post added:", values);
+    if(toast){
+      toast({
+        description: "Your post has been published.",
+      })
+      
+    }
+    
     
     
     myform.reset();

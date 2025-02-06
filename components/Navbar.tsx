@@ -1,8 +1,8 @@
 import Link from 'next/link'
-import { auth, signIn, signOut } from "@/auth"
+import { auth} from "@/auth"
 import ModeToggle from './toggle-mod';
 import Profile from './profile';
-import { Github } from "lucide-react"
+
 import { CommandDialogDemo } from './mycommand';
 import {
   DropdownMenu,
@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
-import { SidebarTrigger } from './ui/sidebar';
+// import { SidebarTrigger } from './ui/sidebar';
 
 const Navbar = async () => {
   const session = await auth();
@@ -22,7 +22,7 @@ const Navbar = async () => {
     <header className='px-5 py-3  shadow-lg shadow-inherit font-serif '>
       <nav className=' flex justify-between text-2xl items-center '>
         <div>
-          <SidebarTrigger />
+          {/* <SidebarTrigger /> */}
           <Link href="/">
             {/* <Image src='/logo.png' alt='logo' width={90} height={24}></Image> */}
             Logo
@@ -51,12 +51,9 @@ const Navbar = async () => {
                   </Link>
                   <DropdownMenuItem>Billing</DropdownMenuItem>
                   <DropdownMenuItem>Team</DropdownMenuItem>
-                  <Separator/>
-                  <DropdownMenuItem 
-                    onClick={async () => {
-                      "use server"
-                      await signOut({ redirectTo: '/' });
-                    }}
+                  <Separator />
+                  <DropdownMenuItem
+
                   >
                     Log out
                   </DropdownMenuItem>
@@ -78,7 +75,7 @@ const Navbar = async () => {
               <Link href="/"> Features</Link>
               <Link href="/"> Pricing</Link>
             </div>
-
+            {/* 
             <form className='flex items-center gap-1'
               action={async () => {
                 "use server"
@@ -88,9 +85,14 @@ const Navbar = async () => {
               <Button type="submit" >
                 <Github /> Login with Gitub
               </Button>
-              <ModeToggle />
+            </form> */}
+            <Link href="/login">
+              <Button >
+                Login
+              </Button></Link>
 
-            </form>
+            <ModeToggle />
+
 
           </>
         )}
