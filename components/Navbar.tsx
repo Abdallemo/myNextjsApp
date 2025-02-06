@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { auth} from "@/auth"
+import { auth } from "@/auth"
 import ModeToggle from './toggle-mod';
 import Profile from './profile';
 
@@ -14,13 +14,14 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
+import { singOutAction } from '@/lib/authActions/auth_actions';
 // import { SidebarTrigger } from './ui/sidebar';
 
 const Navbar = async () => {
   const session = await auth();
   return (
-    <header className='px-5 py-3  shadow-lg shadow-inherit font-serif '>
-      <nav className=' flex justify-between text-2xl items-center '>
+    <header className='px-5 py-3  shadow-xl  font-serif fixed top-0 w-full z-10 bg-background/95'>
+      <nav className=' flex justify-between text-2xl items-center container '>
         <div>
           {/* <SidebarTrigger /> */}
           <Link href="/">
@@ -53,7 +54,7 @@ const Navbar = async () => {
                   <DropdownMenuItem>Team</DropdownMenuItem>
                   <Separator />
                   <DropdownMenuItem
-
+                    onClick={singOutAction}
                   >
                     Log out
                   </DropdownMenuItem>
@@ -73,25 +74,19 @@ const Navbar = async () => {
           <>
             <div className='flex gap-4'>
               <Link href="/"> Features</Link>
-              <Link href="/"> Pricing</Link>
+              <Link href="#pricing"> Pricing</Link>
             </div>
-            {/* 
-            <form className='flex items-center gap-1'
-              action={async () => {
-                "use server"
-                await signIn("github")
-              }}
-            >
-              <Button type="submit" >
-                <Github /> Login with Gitub
-              </Button>
-            </form> */}
-            <Link href="/login">
-              <Button >
-                Login
-              </Button></Link>
 
-            <ModeToggle />
+
+            <div className='flex flex-row items-center'>
+              <Link href="/login">
+                <Button >
+                  Login
+                </Button></Link>
+
+
+              <ModeToggle />
+            </div>
 
 
           </>
