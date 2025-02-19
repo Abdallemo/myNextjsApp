@@ -17,7 +17,7 @@ import { PostType } from '@/lib/getPosts';
 
 export default function MyCard({ post,currentUserEmail }: { post: PostType ,currentUserEmail:string}) {
   const _posts = post;
-  console.log("MyCard - Current User Email:", currentUserEmail);
+  // console.log("MyCard - Current User Email:", currentUserEmail);
   
   
   const delteHandler = async (id: string) => {

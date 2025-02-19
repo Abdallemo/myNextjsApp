@@ -11,7 +11,7 @@ export default async function getPosts() {
 
 
     const session = await auth();
-    console.log('current User_Id :' + session?.user?.email as string)
+    // console.log('current User_Id :' + session?.user?.email as string)
     const postDrizzle = await db.query.PostTable.findMany({
       with: {
         author: {
@@ -31,7 +31,7 @@ export default async function getPosts() {
       }
     })
 
-    console.log(postDrizzle)
+    // console.log(postDrizzle)
 
 
     return postDrizzle;

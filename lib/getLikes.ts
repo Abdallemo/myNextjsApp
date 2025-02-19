@@ -21,7 +21,7 @@ export default async function getPostsLikes(currentPostId: string) {
       liked: like.liked === null ? false : like.liked, // Replace null with false
     }));
 
-    console.log("Sanitized Post Likes:", sanitizedLikes);
+    // console.log("Sanitized Post Likes:", sanitizedLikes);
     return sanitizedLikes;
   } catch (error) {
     console.error("Error fetching post likes:", error);
