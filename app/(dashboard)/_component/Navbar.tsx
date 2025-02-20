@@ -31,7 +31,7 @@ const Navbar = async () => {
 
                 <>
                     <div className='flex gap-4'>
-                        <Link href="posts/newpost"> Create New Post</Link>
+                        <Link href="/posts/newpost"> Create New Post</Link>
                         <Link href="/posts"> Posts</Link>
                         <Link href="#pricing"> Analytics </Link>
                     </div>

@@ -14,7 +14,9 @@ import { Input } from "@/components/ui/input"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-import { useToast } from "@/hooks/use-toast";
+
+import { toast } from "sonner"
+
 
 
 const formSchema = z.object({
@@ -27,72 +29,76 @@ const formSchema = z.object({
 });
 
 export default function CreatePost() {
-  const {toast} = useToast()
+
   const myform = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      title: "",  
+      title: "",
       content: "",
     },
   });
 
   const submitHandler = async (values: z.infer<typeof formSchema>) => {
     await postPosts(values.title, values.content);
-    if(toast){
-      toast({
-        description: "Your post has been published.",
-      })
-      
-    }
-    
-    
-    
+    toast("Event has been created", {
+      description: `Post Published on ${new Date()}`,
+      // action: {
+      //   label: "Undo",
+      //   onClick: () => console.log("Undo"),
+      // },
+    })
+
+
+
+
+
+
     myform.reset();
   };
 
   return (
     <>
       <main className="max-w-full max-h-full  mt-32 mx-auto items-start justify-center">
-      <h1 className="text-center text-3xl">Create New Post</h1>
-      
-      {/* Use ShadCN form */}
-      <Form {...myform}>
-        <form className="flex flex-col max-w-[300px] gap-2 mx-auto" onSubmit={myform.handleSubmit(submitHandler)}>
-          
-          <FormField
-            control={myform.control}
-            name="title"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Title</FormLabel>
-                <FormControl>
-                  <Input placeholder="Enter title..." {...field} />
-                </FormControl>
-                <FormDescription>Post title</FormDescription>
+        <h1 className="text-center text-3xl">Create New Post</h1>
 
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+        {/* Use ShadCN form */}
+        <Form {...myform}>
+          <form className="flex flex-col max-w-[300px] gap-2 mx-auto" onSubmit={myform.handleSubmit(submitHandler)}>
 
-          <FormField
-            control={myform.control}
-            name="content"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Content</FormLabel>
-                <FormControl>
-                  <Input placeholder="Enter content..." {...field} />
-                </FormControl>
-                <FormDescription>your title content</FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+            <FormField
+              control={myform.control}
+              name="title"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Title</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Enter title..." {...field} />
+                  </FormControl>
+                  <FormDescription>Post title</FormDescription>
 
-          <Button type="submit">Add New Post</Button>
-        </form>
-      </Form>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={myform.control}
+              name="content"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Content</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Enter content..." {...field} />
+                  </FormControl>
+                  <FormDescription>your title content</FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <Button type="submit">Add New Post</Button>
+          </form>
+        </Form>
       </main>
     </>
   );

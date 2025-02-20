@@ -5,10 +5,10 @@ import MyCard from "@/components/card";
 import getPosts, { PostType } from "@/lib/getPosts";
 
 
-export default async function PostPage() {
+export default async function PostPages() {
   const posts = await getPosts();
   const session = await auth()
-  // console.log('Yo Current Email ;;;;;;;'+session?.user?.email as string);
+ console.log(session);
   return (
     <>
       <h1 className="text-center text-3xl py-10 mt-10">All Posts</h1>

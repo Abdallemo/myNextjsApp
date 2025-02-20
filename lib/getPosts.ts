@@ -1,17 +1,8 @@
 
 import db from "@/models/drizzle/client.drizle";
-import { auth } from "@/auth";
-
 export type PostType = Awaited<ReturnType<typeof getPosts>>[number];
-
-export default async function getPosts() {
-
-
+export default async function getPosts(offset?: number , limit?: number) {
   try {
-
-
-    const session = await auth();
-    // console.log('current User_Id :' + session?.user?.email as string)
     const postDrizzle = await db.query.PostTable.findMany({
       with: {
         author: {
@@ -28,12 +19,11 @@ export default async function getPosts() {
             id: true, liked: true, postId: true, userId: true
           },
         }
-      }
+      },
+      limit:limit,
+      offset:offset
     })
-
-    // console.log(postDrizzle)
-
-
+    
     return postDrizzle;
   } catch (error) {
     console.error("Error fetching posts:", error);

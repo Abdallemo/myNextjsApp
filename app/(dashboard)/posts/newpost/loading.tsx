@@ -1,11 +1,7 @@
-import { Loader } from "lucide-react";
+import LoaderSpinner from "@/app/(withOutLayout )/_component/LoaderSpinner";
+
 
 export default function Loading() {
-  return (
-    <>
-      <Loader/>
-    </>
-  );
-}
-
-
+    // You can add any UI inside Loading, including a Skeleton.
+    return <LoaderSpinner/>
+  }

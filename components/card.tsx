@@ -12,11 +12,13 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { PostType } from '@/lib/getPosts';
+import { useRouter } from 'next/navigation';
 
 
 
 export default function MyCard({ post,currentUserEmail }: { post: PostType ,currentUserEmail:string}) {
   const _posts = post;
+  const router = useRouter()
   // console.log("MyCard - Current User Email:", currentUserEmail);
   
   
@@ -24,9 +26,12 @@ export default function MyCard({ post,currentUserEmail }: { post: PostType ,curr
      await deletPost(id,currentUserEmail);
     
   };
+  const handleClick= ()=> {
+    router.push(`/posts/${_posts.id}`)
+  }
 
   return (
-    <Card className='w-[350px]'>
+    <Card className='w-[350px]' onClick={handleClick}>
       <CardHeader>
         <CardTitle>{_posts.postTitle}</CardTitle>
         <CardDescription className='flex flex-row justify-end'>

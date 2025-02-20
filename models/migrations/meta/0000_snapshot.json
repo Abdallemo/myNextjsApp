@@ -1,5 +1,5 @@
 {
-  "id": "f99c2885-5b04-4b36-90de-320b40ea70e4",
+  "id": "509e3708-5217-48cf-9ae6-0b2a5956ce8b",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -90,6 +90,72 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
+    "public.postLikes": {
+      "name": "postLikes",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "postId": {
+          "name": "postId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "userId": {
+          "name": "userId",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "liked": {
+          "name": "liked",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "postLikes_postId_posts_id_fk": {
+          "name": "postLikes_postId_posts_id_fk",
+          "tableFrom": "postLikes",
+          "tableTo": "posts",
+          "columnsFrom": [
+            "postId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        },
+        "postLikes_userId_user_email_fk": {
+          "name": "postLikes_userId_user_email_fk",
+          "tableFrom": "postLikes",
+          "tableTo": "user",
+          "columnsFrom": [
+            "userId"
+          ],
+          "columnsTo": [
+            "email"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "cascade"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
     "public.posts": {
       "name": "posts",
       "schema": "",
@@ -107,9 +173,15 @@
           "primaryKey": false,
           "notNull": true
         },
+        "content": {
+          "name": "content",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
         "authorId": {
           "name": "authorId",
-          "type": "uuid",
+          "type": "varchar",
           "primaryKey": false,
           "notNull": true
         },
@@ -117,7 +189,8 @@
           "name": "avarageRating",
           "type": "real",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false,
+          "default": 0
         },
         "createAt": {
           "name": "createAt",
@@ -136,15 +209,15 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "posts_authorId_user_id_fk": {
-          "name": "posts_authorId_user_id_fk",
+        "posts_authorId_user_email_fk": {
+          "name": "posts_authorId_user_email_fk",
           "tableFrom": "posts",
           "tableTo": "user",
           "columnsFrom": [
             "authorId"
           ],
           "columnsTo": [
-            "id"
+            "email"
           ],
           "onDelete": "cascade",
           "onUpdate": "no action"
@@ -224,6 +297,12 @@
           "name": "age",
           "type": "integer",
           "primaryKey": false,
+          "notNull": false
+        },
+        "github_id": {
+          "name": "github_id",
+          "type": "varchar(255)",
+          "primaryKey": false,
           "notNull": true
         },
         "email": {
@@ -245,6 +324,13 @@
       "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
+        "user_github_id_unique": {
+          "name": "user_github_id_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "github_id"
+          ]
+        },
         "user_email_unique": {
           "name": "user_email_unique",
           "nullsNotDistinct": false,

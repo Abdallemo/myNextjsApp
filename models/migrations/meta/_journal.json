@@ -5,57 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1738711190406,
-      "tag": "0000_black_cerebro",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1738772244910,
-      "tag": "0001_lowly_kree",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1738772620647,
-      "tag": "0002_powerful_morph",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "7",
-      "when": 1738775748486,
-      "tag": "0003_stormy_doctor_doom",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "7",
-      "when": 1738776641651,
-      "tag": "0004_glossy_iron_lad",
-      "breakpoints": true
-    },
-    {
-      "idx": 5,
-      "version": "7",
-      "when": 1738776814562,
-      "tag": "0005_illegal_the_order",
-      "breakpoints": true
-    },
-    {
-      "idx": 6,
-      "version": "7",
-      "when": 1738783064118,
-      "tag": "0006_far_franklin_richards",
-      "breakpoints": true
-    },
-    {
-      "idx": 7,
-      "version": "7",
-      "when": 1738785401445,
-      "tag": "0007_slippery_toro",
+      "when": 1740009298904,
+      "tag": "0000_skinny_leopardon",
       "breakpoints": true
     }
   ]
