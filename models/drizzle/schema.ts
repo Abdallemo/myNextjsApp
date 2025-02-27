@@ -21,6 +21,24 @@ export const PostTable = pgTable('posts', {
     createAt: timestamp('createAt').defaultNow(),
     updatedAt: timestamp('updatedAt').defaultNow(),
 })
+
+export const verificationTokens = pgTable(
+    "verificationToken",
+    {
+      identifier: varchar("identifier").notNull(),
+      token: varchar("token").notNull(),
+      expires: timestamp("expires", { mode: "date" }).notNull(),
+    },
+    (verificationToken) => [
+      {
+        compositePk: primaryKey({
+          columns: [verificationToken.identifier, verificationToken.token],
+        }),
+      },
+    ]
+  )
+   
+
 export const PostLikesTable = pgTable('postLikes', {
     id: uuid('id').primaryKey().defaultRandom(),
     postId: uuid('postId').references(() => PostTable.id, { onUpdate: 'cascade' ,onDelete:'cascade'}),

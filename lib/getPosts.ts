@@ -30,3 +30,9 @@ export default async function getPosts(offset?: number , limit?: number) {
     throw new Error("Failed to fetch posts");
   }
 }
+export const getSinglePost = async(postId:string)=>{
+  const postDrizzle = await db.query.PostTable.findFirst({
+    where:(table,fn)=>fn.eq(table.id,postId),
+  })
+  return postDrizzle;
+} 

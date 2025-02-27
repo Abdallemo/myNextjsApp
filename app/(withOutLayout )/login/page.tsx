@@ -8,16 +8,16 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { Github, Mail } from "lucide-react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-import { singInAction } from '@/lib/authActions/auth_actions'
+import { singInAction, singInWithEmailAction } from '@/lib/authActions/auth_actions'
 import { useState } from "react"
 import LoginLoader from "../_component/myLoadingComp"
 const loginFormSchema = z.object({
   email: z.string().min(4, {
     message: "email must be at least 4 characters.",
-  }).refine((value) => /^[a-zA-Z]+[-'s]?[a-zA-Z ]+$/.test(value ?? ""), 'Title should contain only alphabets'),
-  password: z.string().min(4, {
-    message: "password must be at least 4 characters.",
-  }),
+  })
+  // password: z.string().min(4, {
+  //   message: "password must be at least 4 characters.",
+  // }),
 })
 
 export default function Login() {
@@ -25,6 +25,8 @@ export default function Login() {
 
   const submitHandler = async (values: z.infer<typeof loginFormSchema>) => {
     myformController.reset();
+    setLoadingState(true);
+    singInWithEmailAction(values.email);
   };
 
 
@@ -32,7 +34,7 @@ export default function Login() {
     resolver: zodResolver(loginFormSchema),
     defaultValues: {
       email: '',
-      password: ''
+      // password: ''
     }
   })
   return (
@@ -77,7 +79,7 @@ export default function Login() {
                       <FormMessage />
                     </FormItem>
                   )} />
-                  <FormField control={myformController.control} name="password" render={({ field }) => (
+                  {/* <FormField control={myformController.control} name="password" render={({ field }) => (
                     <FormItem>
                       <FormLabel>Password</FormLabel>
                       <FormControl>
@@ -85,7 +87,7 @@ export default function Login() {
                       </FormControl>
                       <FormMessage />
                     </FormItem>
-                  )} />
+                  )} /> */}
 
                   <Button className="px-28 py-6 mt-4" variant={'default'}>
                     Login

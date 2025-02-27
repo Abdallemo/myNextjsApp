@@ -15,7 +15,7 @@ export default async function getPostsLikes(currentPostId: string) {
       },
     });
 
-    // If liked is null, treat it as false (or any default value you prefer)
+    
     const sanitizedLikes = postLikes.map(like => ({
       ...like,
       liked: like.liked === null ? false : like.liked, // Replace null with false
