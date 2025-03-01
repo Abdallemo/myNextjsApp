@@ -2,7 +2,7 @@
 import { auth } from "@/auth";
 import MyCard from "@/components/card";
 // import {Card} from "@/components/ui/card";
-import getPosts, { PostType } from "@/lib/getPosts";
+import getPosts, { PostType } from "@/lib/dbActions/getPosts";
 
 
 export default async function PostPages() {

@@ -1,6 +1,6 @@
 'use client'
 import { Button } from "@/components/ui/button";
-import postPosts from "@/lib/postPosts";
+import postPosts from "@/lib/dbActions/postPosts";
 import {
   Form,
   FormControl,

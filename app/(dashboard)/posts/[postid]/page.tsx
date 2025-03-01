@@ -1,5 +1,5 @@
-import getPostsLikes from "@/lib/getLikes";
-import { getSinglePost } from "@/lib/getPosts";
+import getPostsLikes from "@/lib/dbActions/getLikes";
+import { getSinglePost } from "@/lib/dbActions/getPosts";
 
 export  default async function PostPage({
     params,

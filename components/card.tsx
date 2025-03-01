@@ -2,7 +2,7 @@
 import Favoratebtn from '@/components/favoratebtn'
 import { Trash2 } from 'lucide-react';
 import { Button } from './ui/button';
-import deletPost from '@/lib/deletePost';
+import deletPost from '@/lib/dbActions/deletePost';
 import {
   Card,
   CardContent,
@@ -11,7 +11,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { PostType } from '@/lib/getPosts';
+import { PostType } from '@/lib/dbActions/getPosts';
 import { useRouter } from 'next/navigation';
 
 

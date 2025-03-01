@@ -2,8 +2,8 @@
 import { Heart } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import { Button } from './ui/button';
-import {addlikes} from '@/lib/addLikes';
-import getPostsLikes from '@/lib/getLikes';
+import {addlikes} from '@/lib/dbActions/addLikes';
+import getPostsLikes from '@/lib/dbActions/getLikes';
 import { motion, AnimatePresence } from "framer-motion"
 import { FormatCompactNumber } from '@/lib/helpers/formatIng';
 export default function Favoratebtn({ postId, userId }: { postId: string; userId: string }) {
