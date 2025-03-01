@@ -26,7 +26,6 @@ export default function MyCard({ post, currentUserEmail }: { post: PostType, cur
     await deletPost(id, currentUserEmail);
 
   };
- 
   const handleClick = () => {
     router.push(`/posts/${_posts.id}`)
   }
