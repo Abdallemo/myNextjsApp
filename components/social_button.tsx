@@ -23,7 +23,7 @@ export default function SocialButton({
   callback,
   icon,
   number,
-  Color = "pink",
+  Color = "red",
   Status = false,
 }: props) {
   const [engagementStatus, setEngagementStatus] = useState<boolean>(Status);
@@ -42,7 +42,7 @@ export default function SocialButton({
       className="group flex flex-row gap-1 w-fit"
       style={{ "--color-var": Color } as React.CSSProperties} 
     >
-      <div className={cn("items-center flex p-1 rounded-full justify-center transition-colors ease-linear")} >
+      <div className="group-hover:bg-[var(--color-var)]/20 items-center flex p-1 rounded-full justify-center transition-colors ease-linear">
         <button
           className={cn(
             "group transition-colors",
@@ -105,6 +105,6 @@ export function FormatCompactNumber(number: number) {
   return compactNumberFormating.format(number);
 
 }
-export function cn(...inputs: ClassValue[]) {
+function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
