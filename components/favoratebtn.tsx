@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react'
 import { addlikes } from '@/lib/dbActions/addLikes';
 import getPostsLikes from '@/lib/dbActions/getLikes';
-import SocialButton from './social-button';
+import SocialButton from './social_button';
 
 
 
