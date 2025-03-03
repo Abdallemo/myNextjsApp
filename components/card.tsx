@@ -34,24 +34,25 @@ export default function MyCard({ post, currentUserEmail }: { post: PostType, cur
     <Card className='w-[350px]'>
       <CardHeader className=''>
         <CardTitle className='flex flex-row justify-between items-center'>
-          {_posts.postTitle} 
+          {_posts.postTitle}
           <Favoratebtn postId={post.id} userId={currentUserEmail} />
 
         </CardTitle>
         <CardDescription className='flex flex-row justify-end'>
-    
+
         </CardDescription>
       </CardHeader>
       <CardContent>
         <p>{_posts.content}</p>
+        
       </CardContent>
       <CardFooter className='flex flex-row justify-between '>
-      <Button variant={'secondary'}  onClick={handleClick} className='transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 '>ReadMore</Button>
+        <Button variant={'secondary'} onClick={handleClick} className='transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 '>ReadMore</Button>
         {post.authorId == currentUserEmail ?
           (<Button onClick={() => delteHandler(_posts.id)} variant={'default'}>
             <Trash2 />
           </Button>) : null}
-          
+
       </CardFooter>
     </Card>
   );
